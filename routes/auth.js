@@ -5,12 +5,19 @@ const router = express.Router()
 const User=require("../models/User")
 const jwt = require('jsonwebtoken')
 const config=require("config")
+const auth=require("../middleware/auth")
 
 // @route           GET api/users
 // @desc(ription)   Get logged in user
 // @access          Private
-router.get('/', (req, res) => {
-  res.send('logged in a user')
+router.get('/', auth,async (req, res) => {
+try {
+    const user=await User.findById(req.user.id).select('-password');
+    res.json(user)
+} catch (error) {
+    console.log(error)
+    res.status(500).send("server error")
+}
 })
 
 // @route           POST api/users
