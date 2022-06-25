@@ -1,10 +1,11 @@
 import React, { Fragment, useContext } from 'react'
-import contactContext from '../../../context/contact/contactContex'
+import ContactContext from "../../../context/contact/contactContext"
 import ContactItem from './ContactItem'
 
 const Contacts = () => {
-  const contactContex = useContext(contactContext)
+  const contactContex = useContext(ContactContext)
   const { contacts } = contactContex
+  console.log(contactContex)
 
   return (
     <Fragment>
